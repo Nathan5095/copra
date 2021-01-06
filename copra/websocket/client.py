@@ -292,13 +292,19 @@ class Client(WebSocketClientFactory):
         logger.error('{}. {}'.format(message, reason))
 
     def on_message(self, message):
+        print('recieved message')
+        loop = asyncio.get_event_loop()
+        json_message = json.loads(message)
+
+        with open('new_websocket_data.json', 'w') as f:
+            json.dump(json_message, f)
+            loop.stop()
         """Callback fired when a complete WebSocket message was received.
 
         You will likely want to override this method.
         
         :param dict message: Dictionary representing the message.
         """
-        print(message)
 
     async def close(self):
         """Close the WebSocket connection.
