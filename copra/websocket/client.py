@@ -294,7 +294,7 @@ class Client(WebSocketClientFactory):
     def on_message(self, message):
         print('recieved message')
         loop = asyncio.get_event_loop()
-        json_message = json.loads(message)
+        json_message = (message)
 
         with open('new_websocket_data.json', 'w') as f:
             json.dump(json_message, f)
